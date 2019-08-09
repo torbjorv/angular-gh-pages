@@ -46,15 +46,11 @@ jobs:
             - restore_cache:
                 key: dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
             - run:
-                name: Set base href
-                command: |
-                    echo Base href: <<parameters.base_href>>
-                    sed -i.bak 's|.*base href.*|<base href='"<< parameters.base_href >>"'>|' ./dist/index.html
-            - run:
                 name: Deploy
-                command: ./scripts/deploy-to-pages.sh $GH_TOKEN ./dist <<parameters.folder>>
+                command: |
+                    ./scripts/update_deploy_list.sh 
+                    ./scripts/deploy.sh $GH_TOKEN <<parameters.folder>> <<parameters.base_href>>
             
-
 workflows:
     build_and_deploy:
         jobs:
@@ -71,8 +67,8 @@ workflows:
                 filters:
                     branches:
                         only: master
-                folder: "builds/latest"
-                base_href: "/tls-home/builds/latest/"
+                target_folder: "builds/latest"
+                base_href: "/angular-gh-pages/builds/latest/"
 
             # Deploy to gh-pages/builds/$CIRCLE_BUILD_NUM
             - deploy:
@@ -83,8 +79,8 @@ workflows:
                 filters:
                     branches:
                         only: master
-                folder: "builds/$CIRCLE_BUILD_NUM"
-                base_href: "/tls-home/builds/$CIRCLE_BUILD_NUM/"
+                target_folder: "builds/$CIRCLE_BUILD_NUM"
+                base_href: "/angular-gh-pages/builds/$CIRCLE_BUILD_NUM/"
 
             # Promoting a given build to 'prod' requires manual approval
             - approve:
@@ -103,5 +99,5 @@ workflows:
                 filters:
                     branches:
                         only: master
-                folder: "."
-                base_href: "/tls-home/"                
+                target_folder: "."
+                base_href: "/angular-gh-pages/"                
