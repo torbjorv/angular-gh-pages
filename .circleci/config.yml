@@ -108,4 +108,4 @@ workflows:
                 filters:
                     branches:
                         only: master
-                version: "prod"                
+                version: prod                
