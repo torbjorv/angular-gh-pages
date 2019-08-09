@@ -46,9 +46,9 @@ main()
     fi
 
     # Commit and push new version and updated version list
-    # git add -A
-    # git commit --allow-empty -m "Deploy '$APP_VERSION' [ci skip]" 
-    # git push --force --quiet origin $BRANCH
+    git add -A
+    git commit --allow-empty -m "Deploy '$APP_VERSION' [ci skip]" 
+    git push --force --quiet origin $BRANCH
 }
 
 main
