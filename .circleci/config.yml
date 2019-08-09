@@ -49,6 +49,9 @@ jobs:
                 name: Deploy
                 command: |
                     ./scripts/update_deploy_list.sh ./deployments.md
+                    git add deployments.md
+                    git commit --allow-empty -m "Update deployment list [ci skip]"  > /dev/null 2>&1
+                    git push --force --quiet origin > /dev/null 2>&1
                     ./scripts/deploy.sh $GH_TOKEN <<parameters.target_folder>> <<parameters.base_href>>
             
 workflows:
