@@ -64,8 +64,7 @@ jobs:
                     cd gh-pages-branch
                     git config --global user.name "CircleCI"
                     git init
-                    echo $CIRCLE_REPOSITORY_URL
-                    git remote add --fetch origin https://$GH_TOKEN@$CIRCLE_REPOSITORY_URL > /dev/null 2>&1
+                    git remote add --fetch origin https://$GH_TOKEN@$github.com/torbjorv/angular-gh-pages.git > /dev/null 2>&1
                     git checkout gh-pages
                     ./versions/deploy.sh << parameters.version >> ../dist https://torbjorv.github.io/angular-gh-pages/ $CIRCLE_COMPARE_URL $CIRCLE_BUILD_URL
                     cd ..
