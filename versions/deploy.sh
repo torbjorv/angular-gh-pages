@@ -45,7 +45,7 @@ main()
 
     # Commit and push new version and updated version list
     git add -A
-    git commit --allow-empty -m "Deploy to branch '$BRANCH' [ci skip]" 
+    git commit --allow-empty -m "Deploy '$APP_VERSION' [ci skip]" 
     git push --force --quiet origin $BRANCH
 }
 
