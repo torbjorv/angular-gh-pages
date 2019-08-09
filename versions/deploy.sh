@@ -28,8 +28,10 @@ deploy_to_folder()
 main() 
 {
     if [ "$APP_VERSION" = "prod" ]; then
+        echo vikings
         deploy_to_folder $APP_FOLDER . $URL_BASE/
     else
+        echo trolls
         BASE_HREF=$URL_BASE/versions/$APP_VERSION/
         deploy_to_folder $APP_FOLDER ./versions/$APP_VERSION $BASE_HREF
         deploy_to_folder $APP_FOLDER ./versions/latest $URL_BASE/versions/latest/
