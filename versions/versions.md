@@ -1,5 +1,6 @@
 | Id | Date | Deployment | Source | CI/CD | Comment |
 | -: | ---- | :--------: | :----: | :---: | ------- |
+| 76 | 09Aug2019 | [link](https://torbjorv.github.io/angular-gh-pages//versions/76/) | [link](https://github.com/torbjorv/angular-gh-pages/commit/48e0e59bfc99211f13ea57e49b741ba1d71bbcd4) | [link](https://circleci.com/workflow-run/f197d583-1b86-4216-a4a6-82226e0385b8) | |
 | 73 | 09Aug2019 | [link](https://torbjorv.github.io/angular-gh-pages//versions/73/) | [link](https://github.com/torbjorv/angular-gh-pages/commit/f4bf93b6dddd709e1932b0d9aca08eda48ff4f07) | [link](https://circleci.com/gh/torbjorv/angular-gh-pages/73) | |
 | 70 | 09Aug2019 | [link](https://torbjorv.github.io/angular-gh-pages//versions/70/) | [link]() | [link](https://circleci.com/gh/torbjorv/angular-gh-pages/70) | |
 | 67 | 09Aug2019 | [link](https://torbjorv.github.io/angular-gh-pages//versions/67/) | [link]() | [link](https://circleci.com/gh/torbjorv/angular-gh-pages/67) | |
