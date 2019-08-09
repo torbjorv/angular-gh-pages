@@ -37,7 +37,7 @@ cd -  > /dev/null 2>&1
 # Copy angular app
 echo Copying...
 cp -a ../dist/* $TARGET_FOLDER
-sed -i.bak 's|.*base href.*|<base href='"$TARGET_FOLDER"'>|' $TARGET_FOLDER/index.html
+sed -i.bak 's|.*base href.*|<base href='"$BASE_HREF"'>|' $TARGET_FOLDER/index.html
 
 echo Adding files to git...
 git add -A > /dev/null 2>&1
