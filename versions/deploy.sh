@@ -5,8 +5,8 @@ set -e
 APP_VERSION=$1  #'prod' or ID
 APP_FOLDER=$2   # Copy the app from here
 URL_BASE=$3     # Complete base URL to gh-pages location (no trailing slash)
-CICD=$4         # URL for CI/CD
-SOURCE=$5       # URL for source
+URL_CICD=$4     # URL for CI/CD
+URL_SOURCE=$5   # URL for source
 
 deploy_to_folder()
 {
@@ -30,16 +30,16 @@ main()
     if [ "$APP_VERSION" == "prod" ]; then
         deploy_to_folder $APP_FOLDER . $URL_BASE/
     else
-        deploy_to_folder $APP_FOLDER ./versions/$APP_VERSION $URL_BASE/versions/$APP_VERSION/
+        BASE_HREF=$URL_BASE/versions/$APP_VERSION/
+        deploy_to_folder $APP_FOLDER ./versions/$APP_VERSION $BASE_HREF
         deploy_to_folder $APP_FOLDER ./versions/latest $URL_BASE/versions/latest/
 
         # Assume we're in a CircleCI context but could easily be parametrized
 
         DEPLOY_DATE=`date +%d%b%Y`
-        DEPLOY_URL=''
 
         sed -i.bak '3i\
-        | '"$APP_VERSION"' | '"$DEPLOY_DATE"' | '"$URL_BASE/versions/$APP_VERSION"' | \
+        | '"$APP_VERSION"' | '"$DEPLOY_DATE"' | [link]('"$BASE_HREF"') | [link]('"$URL_SOURCE"') | [link]('"$URL_CICD"') | | \
         ' ./versions/versions.md
     fi
 
