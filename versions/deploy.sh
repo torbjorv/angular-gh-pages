@@ -16,9 +16,9 @@ deploy_to_folder()
 
     echo Deploying to $BASE_HREF
     mkdir -p $DEST
-    cd $DEST  > /dev/null 2>&1
+    cd $DEST 
     find . -name "*" -not \( -path "./.git*" -o -path "./versions*" -o -name 404.html \) -delete
-    cd -  > /dev/null 2>&1
+    cd -
 
     # Copy app
     cp -a $SRC/* $DEST
@@ -42,9 +42,9 @@ main()
     fi
 
     # Commit and push new version and updated version list
-    git add -A > /dev/null 2>&1
-    git commit --allow-empty -m "Deploy to branch '$BRANCH' [ci skip]"  > /dev/null 2>&1
-    git push --force --quiet origin $BRANCH > /dev/null 2>&1
+    git add -A
+    git commit --allow-empty -m "Deploy to branch '$BRANCH' [ci skip]" 
+    git push --force --quiet origin $BRANCH
 }
 
 main
