@@ -30,6 +30,20 @@ jobs:
                 paths:
                     - dist
 
+    update_deployment_list:
+        working_directory: ~/project
+        docker:
+            - image: circleci/node:11.15-browsers
+        steps:
+            - checkout
+            - run:
+                name: Deploy
+                command: |
+                    ./scripts/update_deploy_list.sh ./deployments.md
+                    git add deployments.md
+                    git commit --allow-empty -m "Update deployment list [ci skip]"  > /dev/null 2>&1
+                    git push --force --quiet origin > /dev/null 2>&1
+
     deploy:
         working_directory: ~/project
         docker:
@@ -47,12 +61,7 @@ jobs:
                 key: dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
             - run:
                 name: Deploy
-                command: |
-                    ./scripts/update_deploy_list.sh ./deployments.md
-                    git add deployments.md
-                    git commit --allow-empty -m "Update deployment list [ci skip]"  > /dev/null 2>&1
-                    git push --force --quiet origin > /dev/null 2>&1
-                    ./scripts/deploy.sh $GH_TOKEN <<parameters.target_folder>> <<parameters.base_href>>
+                command: ./scripts/deploy.sh $GH_TOKEN <<parameters.target_folder>> <<parameters.base_href>>
             
 workflows:
     build_and_deploy:
@@ -84,6 +93,10 @@ workflows:
                         only: master
                 target_folder: "builds/$CIRCLE_BUILD_NUM"
                 base_href: "/angular-gh-pages/builds/$CIRCLE_BUILD_NUM/"
+
+            - update_deployment_list:
+                requires: 
+                    - deploy-build
 
             # Promoting a given build to 'prod' requires manual approval
             - approve:
