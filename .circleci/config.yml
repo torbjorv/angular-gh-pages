@@ -49,19 +49,28 @@ jobs:
         docker:
             - image: circleci/node:11.15-browsers
         parameters:
-            base_href:
-                type: string
-                default: ""
-            target_folder:
+            version:
                 type: string
                 default: ""
         steps:
             - checkout
             - restore_cache:
                 key: dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+
             - run:
                 name: Deploy
-                command: ./scripts/deploy.sh $GH_TOKEN <<parameters.target_folder>> <<parameters.base_href>>
+                command: |
+                    mkdir gh-pages-branch
+                    cd gh-pages-branch
+
+                    git config --global user.name "CircleCI"  > /dev/null 2>&1
+                    git init  > /dev/null 2>&1
+                    git remote add --fetch origin https://$GH_TOKEN@$CIRCLE_REPOSITORY_URL > /dev/null 2>&1
+
+                    git checkout gh-pages > /dev/null 2>&1
+                    ./versions/deploy.sh << parameters.version >> ../dist https://torbjorv.github.io/angular-gh-pages/ $CIRCLE_COMPARE_URL $CIRCLE_BUILD_URL
+                    cd ..
+                    rm -rf gh-pages-branch
             
 workflows:
     build_and_deploy:
@@ -73,30 +82,13 @@ workflows:
 
             # Deploy to gh-pages/builds/latest
             - deploy:
-                name: deploy-latest
+                name: deploy-dev
                 requires:
                     - build
                 filters:
                     branches:
                         only: master
-                target_folder: "builds/latest"
-                base_href: "/angular-gh-pages/builds/latest/"
-
-            # Deploy to gh-pages/builds/$CIRCLE_BUILD_NUM
-            - deploy:
-                name: deploy-build
-                requires:
-                    - build
-                    - deploy-latest
-                filters:
-                    branches:
-                        only: master
-                target_folder: "builds/$CIRCLE_BUILD_NUM"
-                base_href: "/angular-gh-pages/builds/$CIRCLE_BUILD_NUM/"
-
-            - update_deployment_list:
-                requires: 
-                    - deploy-build
+                version: "$CIRCLE_BUILD_NUM"
 
             # Promoting a given build to 'prod' requires manual approval
             - approve:
@@ -115,5 +107,4 @@ workflows:
                 filters:
                     branches:
                         only: master
-                target_folder: "."
-                base_href: "/angular-gh-pages/"                
+                version: "prod"                
