@@ -9,7 +9,7 @@
 
         path = window.location.pathname;
         var entryPoint;
-        if (path.startsWith(`/${base}/builds`)) {
+        if (path.startsWith(`/${base}/versions`)) {
             var version = path.split('/')[2];
             entryPoint = `/${base}/${version}/index.html`
         } else {
