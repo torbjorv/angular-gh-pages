@@ -34,8 +34,6 @@ main()
         deploy_to_folder $APP_FOLDER ./versions/$APP_VERSION $BASE_HREF
         deploy_to_folder $APP_FOLDER ./versions/latest $URL_BASE/versions/latest/
 
-        # Assume we're in a CircleCI context but could easily be parametrized
-
         DEPLOY_DATE=`date +%d%b%Y`
 
         sed -i.bak '3i\
@@ -43,13 +41,10 @@ main()
         ' ./versions/versions.md
     fi
 
-    # echo Adding files to git...
-    # git add -A > /dev/null 2>&1
-
-    # echo Committing...
-    # # need 'ci skip' to ignore this branch in CircleCI
-    # git commit --allow-empty -m "Deploy to branch '$BRANCH' [ci skip]"  > /dev/null 2>&1
-    # git push --force --quiet origin $BRANCH > /dev/null 2>&1
+    # Commit and push new version and updated version list
+    git add -A > /dev/null 2>&1
+    git commit --allow-empty -m "Deploy to branch '$BRANCH' [ci skip]"  > /dev/null 2>&1
+    git push --force --quiet origin $BRANCH > /dev/null 2>&1
 }
 
 main
