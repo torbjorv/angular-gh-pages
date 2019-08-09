@@ -27,7 +27,7 @@ deploy_to_folder()
 
 main() 
 {
-    if [ "$APP_VERSION" == "prod" ]; then
+    if [ "$APP_VERSION" = "prod" ]; then
         deploy_to_folder $APP_FOLDER . $URL_BASE/
     else
         BASE_HREF=$URL_BASE/versions/$APP_VERSION/
