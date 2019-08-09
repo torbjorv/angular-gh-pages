@@ -3,8 +3,8 @@ set -e
 
 # Inputs
 APP_VERSION=$1 #'prod' or and ID
-APP_FOLDER=$2
-URL_BASE=$3
+APP_FOLDER=$2 
+URL_BASE=$3 # Include leading forward slash
 
 # Derived variables
 if [ "$APP_VERSION" == "prod" ]; then
