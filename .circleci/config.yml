@@ -49,7 +49,7 @@ jobs:
                 name: Deploy
                 command: |
                     ./scripts/update_deploy_list.sh 
-                    ./scripts/deploy.sh $GH_TOKEN <<parameters.folder>> <<parameters.base_href>>
+                    ./scripts/deploy.sh $GH_TOKEN <<parameters.target_folder>> <<parameters.base_href>>
             
 workflows:
     build_and_deploy:
