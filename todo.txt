@@ -1,0 +1,6 @@
+- circleci CI/CD
+- one angular app showing just a basic message
+- a 'gh-pages' branch
+    - shell script to deploy (and set base href)
+    - 404.html
+    - builds.md
