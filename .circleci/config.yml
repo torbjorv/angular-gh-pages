@@ -62,12 +62,10 @@ jobs:
                 command: |
                     mkdir gh-pages-branch
                     cd gh-pages-branch
-
-                    git config --global user.name "CircleCI"  > /dev/null 2>&1
-                    git init  > /dev/null 2>&1
+                    git config --global user.name "CircleCI"
+                    git init
                     git remote add --fetch origin https://$GH_TOKEN@$CIRCLE_REPOSITORY_URL > /dev/null 2>&1
-
-                    git checkout gh-pages > /dev/null 2>&1
+                    git checkout gh-pages
                     ./versions/deploy.sh << parameters.version >> ../dist https://torbjorv.github.io/angular-gh-pages/ $CIRCLE_COMPARE_URL $CIRCLE_BUILD_URL
                     cd ..
                     rm -rf gh-pages-branch
