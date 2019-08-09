@@ -69,7 +69,7 @@ jobs:
                     echo checking out
                     git checkout gh-pages
                     echo running deployment
-                    ./versions/deploy.sh << parameters.version >> ../dist https://torbjorv.github.io/angular-gh-pages/ $CIRCLE_COMPARE_URL $CIRCLE_BUILD_URL
+                    ./versions/deploy.sh << parameters.version >> ../dist https://torbjorv.github.io/angular-gh-pages/ $CIRCLE_BUILD_URL $CIRCLE_COMPARE_URL 
                     cd ..
                     rm -rf gh-pages-branch
             
