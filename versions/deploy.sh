@@ -37,8 +37,10 @@ main()
         DEPLOY_DATE=`date +%d%b%Y`
 
         sed -i.bak '3i\
-        | '"$APP_VERSION"' | '"$DEPLOY_DATE"' | [link]('"$BASE_HREF"') | [link]('"$URL_SOURCE"') | [link]('"$URL_CICD"') | | \
-        ' ./versions/versions.md
+| '"$APP_VERSION"' | '"$DEPLOY_DATE"' | [link]('"$BASE_HREF"') | [link]('"$URL_SOURCE"') | [link]('"$URL_CICD"') | | \
+' ./versions/versions.md
+
+        rm ./versions/versions.md.bak
     fi
 
     # Commit and push new version and updated version list
