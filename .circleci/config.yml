@@ -48,7 +48,7 @@ jobs:
             - run:
                 name: Deploy
                 command: |
-                    ./scripts/update_deploy_list.sh 
+                    ./scripts/update_deploy_list.sh ./deployments.md
                     ./scripts/deploy.sh $GH_TOKEN <<parameters.target_folder>> <<parameters.base_href>>
             
 workflows:
