@@ -22,31 +22,31 @@ deploy_to_folder()
 
     # Copy app
     cp -a $SRC/* $DEST
-    sed -i '' 's|.*base href.*|<base href='"$BASE_HREF"'>|' $DEST/index.html
+    sed -i.bak 's|.*base href.*|<base href='"$BASE_HREF"'>|' $DEST/index.html
+    rm $DEST/index.html.bak
 }
 
 main() 
 {
     if [ "$APP_VERSION" = "prod" ]; then
-        echo vikings
         deploy_to_folder $APP_FOLDER . $URL_BASE/
     else
-        echo trolls
         BASE_HREF=$URL_BASE/versions/$APP_VERSION/
         deploy_to_folder $APP_FOLDER ./versions/$APP_VERSION $BASE_HREF
         deploy_to_folder $APP_FOLDER ./versions/latest $URL_BASE/versions/latest/
 
         DEPLOY_DATE=`date +%d%b%Y`
 
-        sed -i '' '3i\
+        sed -i.bak '3i\
 | '"$APP_VERSION"' | '"$DEPLOY_DATE"' | [link]('"$BASE_HREF"') | [link]('"$URL_SOURCE"') | [link]('"$URL_CICD"') | |' ./versions/versions.md
 
+        rm ./versions/versions.md.bak
     fi
 
     # Commit and push new version and updated version list
-    git add -A
-    git commit --allow-empty -m "Deploy '$APP_VERSION' [ci skip]" 
-    git push --force --quiet origin $BRANCH
+    git add -A > /dev/null 2>&1
+    git commit --allow-empty -m "Deploy '$APP_VERSION' [ci skip]" > /dev/null 2>&1
+    git push --force --quiet origin $BRANCH > /dev/null 2>&1
 }
 
 main
