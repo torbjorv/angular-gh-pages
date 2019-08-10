@@ -22,7 +22,7 @@ deploy_to_folder()
 
     # Copy app
     cp -a $SRC/* $DEST
-    sed -i.bak 's|.*base href.*|<base href='"$BASE_HREF"'>|' $DEST/index.html
+    sed -i.bak 's|.*base href.*|<base href='"\"$BASE_HREF\""'>|' $DEST/index.html
     rm $DEST/index.html.bak
 }
 
@@ -44,9 +44,9 @@ main()
     fi
 
     # Commit and push new version and updated version list
-    git add -A > /dev/null 2>&1
-    git commit --allow-empty -m "Deploy '$APP_VERSION' [ci skip]" > /dev/null 2>&1
-    git push --force --quiet origin $BRANCH > /dev/null 2>&1
+    # git add -A > /dev/null 2>&1
+    # git commit --allow-empty -m "Deploy '$APP_VERSION' [ci skip]" > /dev/null 2>&1
+    # git push --force --quiet origin $BRANCH > /dev/null 2>&1
 }
 
 main
