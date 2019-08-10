@@ -15,7 +15,7 @@
             var version = path.substring(base.length).split('/')[2];
 
             console.log(`Loading version '${version}'`);
-            entryPoint = `${base}/${version}/index.html`
+            entryPoint = `${base}/versions/${version}/index.html`
         } else {
             console.log('Loading main version');
             entryPoint = `${base}/index.html`
