@@ -1,5 +1,6 @@
 | Id | Date | Deployment | Source | CI/CD | Comment |
 | -: | ---- | :--------: | :----: | :---: | ------- |
+| 97 | 10Aug2019 | [link](https://torbjorv.github.io/angular-gh-pages//versions/97/) | [link](https://github.com/torbjorv/angular-gh-pages/commit/4a6bf1b7f8b102edda053663acaa64d28b6b7cae) | [link](https://circleci.com/workflow-run/7e7da355-4def-4d32-990f-88e27e6d6ec4) | |
 | 94 | 10Aug2019 | [link](https://torbjorv.github.io/angular-gh-pages//versions/94/) | [link](https://github.com/torbjorv/angular-gh-pages/commit/270d1cdbf920f6096525abba9f36064c30786c85) | [link](https://circleci.com/workflow-run/2dd2f3ed-c94a-43b2-b8a3-53501bbc2287) | |
 | 89 | 10Aug2019 | [link](https://torbjorv.github.io/angular-gh-pages//versions/89/) | [link](https://github.com/torbjorv/angular-gh-pages/commit/93df1f3e3c46ce1a0c27f2ec5ac8e945115a0cef) | [link](https://circleci.com/workflow-run/2e6a92e7-a47f-4241-ab53-a05d729713f6) | |
 | 86 | 10Aug2019 | [link](https://torbjorv.github.io/angular-gh-pages//versions/86/) | [link](https://github.com/torbjorv/angular-gh-pages/commit/048dc80b2e916f65b8ca01d033c3daee02a7fbfb) | [link](https://circleci.com/workflow-run/24bdcacc-b43a-489e-983f-88759165921f) | |
