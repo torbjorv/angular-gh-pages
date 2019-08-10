@@ -5,15 +5,20 @@
         // This file is the response to any unknown URL, so 
         // can't use its location to figure out the base. So simply 
         // hardcode it here
-        base = 'angular-gh-pages'
+        base = '/angular-gh-pages'
 
         path = window.location.pathname;
         var entryPoint;
-        if (path.startsWith(`/${base}/versions`)) {
-            var version = path.split('/')[2];
-            entryPoint = `/${base}/${version}/index.html`
+        console.log(`Base: ${base} Path: ${path}`);
+        if (path.startsWith(`${base}/versions`)) {
+
+            var version = path.substring(base.length).split('/')[2];
+
+            console.log(`Loading version '${version}'`);
+            entryPoint = `${base}/${version}/index.html`
         } else {
-            entryPoint = `/${base}/index.html`
+            console.log('Loading main version');
+            entryPoint = `${base}/index.html`
         }
 
         // Cannot use redirect because that would change the URL and break Angular routes, so
